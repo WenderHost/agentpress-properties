@@ -1,23 +1,23 @@
-=== Plugin Name ===
-Contributors: nathanrice, wpmuguru, studiopress
+=== AgentPress Properties ===
+Contributors: nathanrice, wpmuguru, studiopress, nick_thegeek
 Tags: real estate, agentpress, genesis, genesiswp
-Requires at least: 3.8
-Tested up to: 4.0
-Stable tag: 1.2.2
+Requires at least: 4.0.0
+Tested up to: 4.1.1
+Stable tag: 1.2.3
 
 This plugin adds a Listings custom post type for Real Estate agents.
 
 == Description ==
 
-The AgentPress Listings plugin uses custom post types, custom taxonomies, and widgets to create a listings management system.
+A fork of The AgentPress Listings plugin. Uses custom post types, custom taxonomies, and widgets to create a properties management system.
 
-You can use the taxonomy creation tool to create your own way of classifying listings, and use those taxonomies to allow users to search for listings.
+You can use the taxonomy creation tool to create your own way of classifying properties, and use those taxonomies to allow users to search for properties.
 
 == Installation ==
 
-1. Upload the entire `agentpress-listings` folder to the `/wp-content/plugins/` directory
+1. Upload the entire `agentpress-properties` folder to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Begin creating listings and listing taxonomies.
+1. Begin creating properties and listing taxonomies.
 
 == Frequently Asked Questions ==
 
@@ -63,3 +63,17 @@ No, but that doesn't necessarily mean it's perfect. Please report any bugs to us
 * Fix link to edit taxonomy
 * Conditionally output markup in listing widget
 * Use wp_get_theme() instead of get_theme_data()
+<<<<<<< HEAD
+=======
+
+= 1.2.1 =
+* Fixed bug with listing search results using wrong template
+* Fixed issue with breadcrumbs on listing search results page
+
+= 1.2.2 =
+* Fixed issue with incorrect usage of `array_pop()`
+
+= 1.2.3 =
+* Fixed issue where existing taxonomies could not be edited
+* Fixed typo in the language .pot filename
+>>>>>>> develop
