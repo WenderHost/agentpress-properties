@@ -1,6 +1,6 @@
 <?php
 /**
- * Holds miscellaneous functions for use in the AgentPress Listings plugin
+ * Holds miscellaneous functions for use in the AgentPress Properties plugin
  *
  */
 

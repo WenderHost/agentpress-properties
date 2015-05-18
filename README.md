@@ -1,2 +1,2 @@
-agentpress-listings
+agentpress-properties
 ===================

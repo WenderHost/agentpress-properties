@@ -1,5 +1,5 @@
 <?php screen_icon( 'themes' ); ?>
-<h2><?php _e( 'Listing Taxonomies', 'agentpress-listings' ); ?></h2>
+<h2><?php _e( 'Property Taxonomies', 'agentpress-properties' ); ?></h2>
 
 <div id="col-container">
 
@@ -8,21 +8,21 @@
 
 		<?php #print_r( get_option( $this->settings_field ) ); ?>
 
-		<h3><?php _e( 'Current Listing Taxonomies', 'agentpress-listings' ); ?></h3>
+		<h3><?php _e( 'Current Property Taxonomies', 'agentpress-properties' ); ?></h3>
 		<table class="widefat tag fixed" cellspacing="0">
 			<thead>
 			<tr>
-			<th scope="col" class="manage-column column-slug"><?php _e( 'ID', 'agentpress-listings' ); ?></th>
-			<th scope="col" class="manage-column column-singular-name"><?php _e( 'Singular Name', 'agentpress-listings' ); ?></th>
-			<th scope="col" class="manage-column column-plural-name"><?php _e( 'Plural Name', 'agentpress-listings' ); ?></th>
+			<th scope="col" class="manage-column column-slug"><?php _e( 'ID', 'agentpress-properties' ); ?></th>
+			<th scope="col" class="manage-column column-singular-name"><?php _e( 'Singular Name', 'agentpress-properties' ); ?></th>
+			<th scope="col" class="manage-column column-plural-name"><?php _e( 'Plural Name', 'agentpress-properties' ); ?></th>
 			</tr>
 			</thead>
 
 			<tfoot>
 			<tr>
-			<th scope="col" class="manage-column column-slug"><?php _e( 'ID', 'agentpress-listings' ); ?></th>
-			<th scope="col" class="manage-column column-singular-name"><?php _e( 'Singular Name', 'agentpress-listings'); ?></th>
-			<th scope="col" class="manage-column column-plural-name"><?php _e( 'Plural Name', 'agentpress-listings'); ?></th>
+			<th scope="col" class="manage-column column-slug"><?php _e( 'ID', 'agentpress-properties' ); ?></th>
+			<th scope="col" class="manage-column column-singular-name"><?php _e( 'Singular Name', 'agentpress-properties'); ?></th>
+			<th scope="col" class="manage-column column-plural-name"><?php _e( 'Plural Name', 'agentpress-properties'); ?></th>
 			</tr>
 			</tfoot>
 
@@ -31,9 +31,9 @@
 				<?php
 				$alt = true;
 
-				$listing_taxonomies = array_merge( $this->property_features_taxonomy(), get_option( $this->settings_field ) );
+				$property_taxonomies = array_merge( $this->property_features_taxonomy(), get_option( $this->settings_field ) );
 
-				foreach ( (array) $listing_taxonomies as $id => $data ) :
+				foreach ( (array) $property_taxonomies as $id => $data ) :
 				?>
 
 				<tr <?php if ( $alt ) { echo 'class="alternate"'; $alt = false; } else { $alt = true; } ?>>
@@ -47,8 +47,8 @@
 						<br />
 
 						<div class="row-actions">
-							<span class="edit"><a href="<?php echo admin_url( 'admin.php?page=' . $this->menu_page . '&amp;view=edit&amp;id=' . esc_html( $id ) ); ?>"><?php _e( 'Edit', 'agentpress-listings' ); ?></a> | </span>
-							<span class="delete"><a class="delete-tag" href="<?php echo wp_nonce_url( admin_url( 'admin.php?page=' . $this->menu_page . '&amp;action=delete&amp;id=' . esc_html( $id ) ), 'agentpress-action_delete-taxonomy' ); ?>"><?php _e( 'Delete', 'agentpress-listings' ); ?></a></span>
+							<span class="edit"><a href="<?php echo admin_url( 'admin.php?page=' . $this->menu_page . '&amp;view=edit&amp;id=' . esc_html( $id ) ); ?>"><?php _e( 'Edit', 'agentpress-properties' ); ?></a> | </span>
+							<span class="delete"><a class="delete-tag" href="<?php echo wp_nonce_url( admin_url( 'admin.php?page=' . $this->menu_page . '&amp;action=delete&amp;id=' . esc_html( $id ) ), 'agentpress-action_delete-taxonomy' ); ?>"><?php _e( 'Delete', 'agentpress-properties' ); ?></a></span>
 						</div>
 					<?php endif; ?>
 
@@ -69,30 +69,30 @@
 	<div class="col-wrap">
 
 		<div class="form-wrap">
-			<h3><?php _e( 'Add New Listing Taxonomy', 'agentpress-listings' ); ?></h3>
+			<h3><?php _e( 'Add New Property Taxonomy', 'agentpress-properties' ); ?></h3>
 
 			<form method="post" action="<?php echo admin_url( 'admin.php?page=register-taxonomies&amp;action=create' ); ?>">
 			<?php wp_nonce_field( 'agentpress-action_create-taxonomy' ); ?>
 
 			<div class="form-field">
-				<label for="taxonomy-id"><?php _e( 'ID', 'agentpress-listings' ); ?></label>
+				<label for="taxonomy-id"><?php _e( 'ID', 'agentpress-properties' ); ?></label>
 				<input name="agentpress_taxonomy[id]" id="taxonomy-id" type="text" value="" size="40" />
-				<p><?php _e( 'The unique ID is used to register the taxonomy.<br />(no spaces, underscores, or special characters)', 'agentpress-listings' ); ?></p>
+				<p><?php _e( 'The unique ID is used to register the taxonomy.<br />(no spaces, underscores, or special characters)', 'agentpress-properties' ); ?></p>
 			</div>
 
 			<div class="form-field form-required">
-				<label for="taxonomy-name"><?php _e( 'Plural Name', 'agentpress-listings' ); ?></label>
+				<label for="taxonomy-name"><?php _e( 'Plural Name', 'agentpress-properties' ); ?></label>
 				<input name="agentpress_taxonomy[name]" id="taxonomy-name" type="text" value="" size="40" />
-				<p><?php _e( 'Example: "Property Types" or "Locations"', 'agentpress-listings' ); ?></p>
+				<p><?php _e( 'Example: "Property Types" or "Locations"', 'agentpress-properties' ); ?></p>
 			</div>
 
 			<div class="form-field form-required">
-				<label for="taxonomy-singular-name"><?php _e( 'Singular Name', 'agentpress-listings' ); ?></label>
+				<label for="taxonomy-singular-name"><?php _e( 'Singular Name', 'agentpress-properties' ); ?></label>
 				<input name="agentpress_taxonomy[singular_name]" id="taxonomy-singular-name" type="text" value="" size="40" />
-				<p><?php _e( 'Example: "Property Type" or "Location"', 'agentpress-listings' ); ?></p>
+				<p><?php _e( 'Example: "Property Type" or "Location"', 'agentpress-properties' ); ?></p>
 			</div>
 
-			<?php submit_button( __( 'Add New Taxonomy', 'agentpress-listings' ), 'secondary' ); ?>
+			<?php submit_button( __( 'Add New Taxonomy', 'agentpress-properties' ), 'secondary' ); ?>
 			</form>
 		</div>
 
