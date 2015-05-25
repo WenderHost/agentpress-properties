@@ -92,6 +92,9 @@ class AgentPress_Featured_Listings_Widget extends WP_Widget {
 
 				}
 
+				if( $address == $name )
+					$loop .= '<span class="listing-address">&nbsp;</span>';
+
 				//$loop .= sprintf( '<a href="%s" class="more-link">%s</a>', get_permalink(), __( 'View Property', 'agentpress-listings' ) );
 
 				$toggle = $toggle == 'left' ? 'right' : 'left';
