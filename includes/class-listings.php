@@ -88,7 +88,7 @@ class AgentPress_Listings {
 				'menu_icon'     => 'dashicons-admin-home',
 				'has_archive'   => true,
 				'supports'      => array( 'title', 'editor', 'comments', 'thumbnail', 'genesis-seo', 'genesis-layouts', 'genesis-simple-sidebars' ),
-				'rewrite'       => array( 'slug' => 'listings' ),
+				'rewrite'       => array( 'slug' => 'properties' ),
 			)
 		);
 
