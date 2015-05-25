@@ -46,16 +46,16 @@ class AgentPress_Featured_Listings_Widget extends WP_Widget {
 
 				//* Pull all the listing information
 				$custom_text = genesis_get_custom_field( '_listing_text' );
-				$price       = genesis_get_custom_field( '_listing_price' );
 				$address     = genesis_get_custom_field( '_listing_address' );
 				$city        = genesis_get_custom_field( '_listing_city' );
 				$state       = genesis_get_custom_field( '_listing_state' );
 				$zip         = genesis_get_custom_field( '_listing_zip' );
+				$sq_ft		 = genesis_get_custom_field( '_listing_sqft' );
 
 				$loop .= sprintf( '<a href="%s">%s</a>', get_permalink(), genesis_get_image( array( 'size' => 'properties' ) ) );
 
-				if ( $price ) {
-					$loop .= sprintf( '<span class="listing-price">%s</span>', $price );
+				if ( $sq_ft ) {
+					$loop .= sprintf( '<span class="listing-price">%s</span>', $sq_ft . ' ft<sup>2</sup>' );
 				}
 
 				if ( strlen( $custom_text ) ) {
