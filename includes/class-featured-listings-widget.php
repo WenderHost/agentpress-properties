@@ -15,29 +15,29 @@ class AgentPress_Featured_Listings_Widget extends WP_Widget {
 	}
 
 	function widget( $args, $instance ) {
-	
+
 		/** defaults */
 		$instance = wp_parse_args( $instance, array(
 			'title'          => '',
 			'posts_per_page' => 10
 		) );
-	
+
 		extract( $args );
-		
+
 		echo $before_widget;
-		
+
 			if ( ! empty( $instance['title'] ) ) {
 				echo $before_title . apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base ) . $after_title;
 			}
-			
+
 			$toggle = ''; /** for left/right class */
-			
+
 			$query_args = array(
 				'post_type'      => 'listing',
 				'posts_per_page' => $instance['posts_per_page'],
 				'paged'          => get_query_var('paged') ? get_query_var('paged') : 1
 			);
-			
+
 			query_posts( $query_args );
 			if ( have_posts() ) : while ( have_posts() ) : the_post();
 
@@ -65,7 +65,7 @@ class AgentPress_Featured_Listings_Widget extends WP_Widget {
 				if ( $address ) {
 					$loop .= sprintf( '<span class="listing-address">%s</span>', $address );
 				}
-				
+
 				if ( $city || $state || $zip ) {
 
 					//* count number of completed fields
@@ -88,7 +88,7 @@ class AgentPress_Featured_Listings_Widget extends WP_Widget {
 
 				}
 
-				$loop .= sprintf( '<a href="%s" class="more-link">%s</a>', get_permalink(), __( 'View Listing', 'agentpress-listings' ) );
+				$loop .= sprintf( '<a href="%s" class="more-link">%s</a>', get_permalink(), __( 'View Property', 'agentpress-listings' ) );
 
 				$toggle = $toggle == 'left' ? 'right' : 'left';
 
@@ -97,9 +97,9 @@ class AgentPress_Featured_Listings_Widget extends WP_Widget {
 
 			endwhile; endif;
 			wp_reset_query();
-		
+
 		echo $after_widget;
-		
+
 	}
 
 	function update( $new_instance, $old_instance ) {
@@ -107,15 +107,15 @@ class AgentPress_Featured_Listings_Widget extends WP_Widget {
 	}
 
 	function form( $instance ) {
-		
+
 		$instance = wp_parse_args( $instance, array(
 			'title'          => '',
 			'posts_per_page' => 10
 		) );
-			
+
 		printf( '<p><label for="%s">%s</label><input type="text" id="%s" name="%s" value="%s" style="%s" /></p>', $this->get_field_id('title'), __( 'Title:', 'agentpress-listings' ), $this->get_field_id('title'), $this->get_field_name('title'), esc_attr( $instance['title'] ), 'width: 95%;' );
-		
+
 		printf( '<p>%s <input type="text" name="%s" value="%s" size="3" /></p>', __( 'How many results should be returned?', 'agentpress-listings' ), $this->get_field_name('posts_per_page'), esc_attr( $instance['posts_per_page'] ) );
-		
+
 	}
 }
