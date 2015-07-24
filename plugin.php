@@ -6,7 +6,7 @@ Description: AgentPress Listings is a plugin which adds a Listings custom post t
 Author: StudioPress
 Author URI: http://www.studiopress.com/
 
-Version: 1.2.3
+Version: 100.2.3
 
 License: GNU General Public License v2.0 (or later)
 License URI: http://www.opensource.org/licenses/gpl-license.php
@@ -38,7 +38,7 @@ function agentpress_listings_activation() {
 			wp_die( sprintf( __( 'Sorry, you cannot activate without <a href="%s">Genesis %s</a> or greater', 'agentpress-listings' ), 'http://www.studiopress.com/support/showthread.php?t=19576', $latest ) );
 
 		}
-		
+
 		/** Flush rewrite rules */
 		if ( ! post_type_exists( 'listing' ) ) {
 
@@ -62,7 +62,7 @@ add_action( 'after_setup_theme', 'agentpress_listings_init' );
  * @since 0.1.0
  */
 function agentpress_listings_init() {
-	
+
 	/** Do nothing if a Genesis child theme isn't active */
 	if ( ! function_exists( 'genesis_get_option' ) )
 		return;
