@@ -41,33 +41,57 @@ class AgentPress_Featured_Listings_Widget extends WP_Widget {
 			query_posts( $query_args );
 			if ( have_posts() ) : while ( have_posts() ) : the_post();
 
-				//* initialze the $loop variable
-				$loop        = '';
+				$listing_text = genesis_get_custom_field( '_listing_text' );
+				$name = get_the_title();
+				if( function_exists( 'get_field' ) ){
+					$map = get_field( 'map' );
+					$address = $map['address'];
+				} else {
+					$address = '**Missing ACF Plugin**';
+				}
 
-				//* Pull all the listing information
-				$custom_text = genesis_get_custom_field( '_listing_text' );
-				$name 		 = get_the_title();
-				$address     = genesis_get_custom_field( '_listing_address' );
-				$city        = genesis_get_custom_field( '_listing_city' );
-				$state       = genesis_get_custom_field( '_listing_state' );
-				$zip         = genesis_get_custom_field( '_listing_zip' );
-				$sq_ft		 = genesis_get_custom_field( '_listing_sqft' );
+				$sq_ft = genesis_get_custom_field( '_listing_sqft' );
+
+				$loop = ''; // init
 
 				$loop .= sprintf( '<a href="%s">%s</a>', get_permalink(), genesis_get_image( array( 'size' => 'properties' ) ) );
 
-				if ( $sq_ft ) {
-					$loop .= sprintf( '<span class="listing-price">%s</span>', $sq_ft . ' ft<sup>2</sup>' );
+				$sq_ft = ( empty( $sq_ft ) )? $sq_ft = '-- TBA --' : $sq_ft . ' ft<sup>2</sup>' ;
+
+				if( $sq_ft ) {
+					$loop .= sprintf( '<span class="listing-price">%s</span>', $sq_ft );
 				}
 
-				if ( strlen( $custom_text ) ) {
-					$loop .= sprintf( '<span class="listing-text">%s</span>', esc_html( $custom_text ) );
+				if( empty( $listing_text) ){
+					$terms = get_the_terms( $post->ID, 'location' );
+					if( $terms )
+						//echo '<pre>$terms = '.print_r( $terms, true ).'</pre>';
+						if( ! is_wp_error( $terms ) && is_array( $terms ) && 0 < count( $terms ) )
+							$listing_text = $terms[0]->name;
 				}
 
-				if( $name )
+				if( $listing_text ) {
+					$loop .= sprintf( '<span class="listing-text">%s</span>', $listing_text );
+				}
+
+				if( $name && ! stristr( $address, $name ) )
 					$loop .= sprintf( '<span class="listing-title"><a href="%s">%s</a></span>', get_permalink() , $name );
 
 				if ( $address != $name ) {
-					$loop .= sprintf( '<span class="listing-address">%s</span>', $address );
+					$formatted_address = $address;
+
+					/*
+					 * If the property's name == the 1st line of its address,
+					 * link the first line of the address to the property's page,
+					 * and add a double br to make the content the same height as
+					 * properties with names != the 1st line of their addresses.
+					 */
+					if( stristr( $address, $name ) )
+						$formatted_address = preg_replace( '/(.*),/U', '<a href="' . get_permalink() . '">${1}</a>,', $formatted_address, 1  ) . '<br /><br />';
+
+					$formatted_address = preg_replace( '/,/', '<br \/>', $formatted_address, 1 );
+					$formatted_address = str_replace( array( ', United States', ', US'), '', $formatted_address );
+					$loop .= sprintf( '<span class="listing-address">%s</span>', $formatted_address );
 				}
 
 				if ( $city || $state || $zip ) {
@@ -95,7 +119,7 @@ class AgentPress_Featured_Listings_Widget extends WP_Widget {
 				if( $address == $name )
 					$loop .= '<span class="listing-address">&nbsp;</span>';
 
-				//$loop .= sprintf( '<a href="%s" class="more-link">%s</a>', get_permalink(), __( 'View Property', 'agentpress-listings' ) );
+				//$loop .= sprintf( '<a href="%s" class="more-link">%s</a>', get_permalink(), __( 'View Listing', 'agentpress' ) );
 
 				$toggle = $toggle == 'left' ? 'right' : 'left';
 
