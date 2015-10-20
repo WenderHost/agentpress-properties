@@ -46,11 +46,14 @@ class AgentPress_Featured_Listings_Widget extends WP_Widget {
 				if( function_exists( 'get_field' ) ){
 					$map = get_field( 'map' );
 					$address = $map['address'];
+					$sq_ft = get_field( 'total_size' );
+					if( is_numeric( $sq_ft ) )
+						$sq_ft = number_format( $sq_ft );
 				} else {
 					$address = '**Missing ACF Plugin**';
 				}
 
-				$sq_ft = genesis_get_custom_field( '_listing_sqft' );
+				//$sq_ft = genesis_get_custom_field( '_total_size' );
 
 				$loop = ''; // init
 
